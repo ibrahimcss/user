@@ -1,0 +1,4 @@
+# Project exclude paths
+/node_modules/
+/src/entity/User.js
+/src/app.js
