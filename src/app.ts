@@ -3,6 +3,8 @@ import {Request, Response} from "express";
 import * as bodyParser from  "body-parser";
 import {createConnection} from "typeorm";
 import {User} from "./entity/User";
+const  cors = require('cors');
+
 
 // create typeorm connection
 createConnection().then(connection => {
@@ -11,7 +13,7 @@ createConnection().then(connection => {
     // create and setup express app
     const app = express();
     app.use(bodyParser.json());
-
+    app.use(cors());
     // register routes
 
     app.get("/users", async function(req: Request, res: Response) {
@@ -27,6 +29,7 @@ createConnection().then(connection => {
     app.post("/users", async function(req: Request, res: Response) {
         const user = await userRepository.create(req.body);
         const results = await userRepository.save(user);
+
         return res.send(results);
     });
 
