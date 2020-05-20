@@ -11,7 +11,7 @@ export class Image {
     @Column()
     name: string;
 
-    @Column("blob",{
+    @Column("longblob",{
         nullable:true,
         name:"photo"})
     photo: Buffer;
