@@ -4,21 +4,21 @@ import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 
 const routes = [
-    {
+   {
         path: '/',
-        name: 'list',
-        component: () => import('../components/ListUser')
-    },    {
-        path: '/create',
+        name: 'mainComponent',
+        component: () => import('../components/MainComponent')
+    } ,    {
+        path: '/createPost',
         name: 'create',
-        component: () => import('../components/CreateUser')
-    },
+        component: () => import('../components/newsComponent/Post')
+    }/*,
     {
         path: '/edit/:id',
         name: 'edit',
         component: () => import('../components/Edit')
-    }
-]
+    }*/
+];
 
 const router = new VueRouter({
     mode: 'history',

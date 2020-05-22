@@ -1,13 +1,24 @@
 <template>
-  <router-view></router-view>
+  <div class="card">
+    <div class="navbar">
+      <SideNav></SideNav>
+    </div>
+    <router-view></router-view>
+    <div class="card-footer">
+      <Footer></Footer>
+    </div>
+  </div>
+
 </template>
 
 <script>
 
 
+import SideNav from "./components/SideNav";
 export default {
   name: 'App',
   components: {
+    SideNav
 
   }
 }

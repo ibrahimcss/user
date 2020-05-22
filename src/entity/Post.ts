@@ -25,6 +25,9 @@ export class Post {
     content: string;
 
     @Column()
+    references:string;
+
+    @Column()
     @CreateDateColumn()
     createdAt: Date;
 

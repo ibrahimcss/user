@@ -2,6 +2,8 @@
 import {Request, Response} from "express";
 import {Image} from "../entity/Image";
 import {getRepository} from "typeorm";
+import {User} from "../entity/User";
+
 interface MulterRequest extends Request {
     file: any;
 }
@@ -11,19 +13,31 @@ class ImageController {
 
 
     static savePhoto= async (req: MulterRequest , res: Response) =>{
+        const url = req.protocol + '://' + req.get('host');
    let image=new Image();
+  const imageJson=JSON.parse(req.body.json);
+  image.post=imageJson.post;
+  image.photoDetail=imageJson.photoDetail;
+  image.name=imageJson.name;
+  image.photoUrl=url+"/public/"+req.file.originalname;
 
-        console.log("req body",req.body);
-        console.log("req photo",req.file);
-        console.log("req json",req.body.json);
-        console.log("req json name",req.body.json.name);
-/*        image.photo=req.file;
    const imageRepository=getRepository(Image);
-   imageRepository.save(image);*/
+   imageRepository.save(image);
 
 
-res.status(200);
+res.status(req.body);
 
     };
+    static listAll = async (req: Request, res: Response) => {
+        //Get users from database
+        const imageRepository = getRepository(Image);
+        const images = await imageRepository.find({
+            select: ["name", "photoUrl"] //We dont want to send the passwords on response
+        });
+
+        //Send the users object
+        res.send(images);
+    };
+
 }
 export default ImageController;

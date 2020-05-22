@@ -21,6 +21,14 @@ createConnection().then(connection => {
    // register routes
     app.use("/api", routes);
 
+    app.use('/public', express.static('public'));
+    app.use((req, res, next) => {
+        // Error goes via `next()` method
+        setImmediate(() => {
+            next(new Error('Something went wrong'));
+        });
+    });
+
     // start express server
     app.listen(3000, () => {
         console.log("Server started on port 3000!");
